@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Шаблон с фоном</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: #fff;
+      font-family: sans-serif;
+    }
+
+    .form {
+      padding: 20px;
+    }
+
+    input, textarea, button {
+      font-size: 70px;
+      width: 100%;
+      height: 200px;
+    }
+
+    .template-wrapper {
+      display: none;
+      position: relative;
+      min-height: 100vh;
+      padding-bottom: 120px; /* невидимый запас снизу */
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('Onay.png'); /* твоя PNG */
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    .field {
+      position: absolute;
+      font-weight: bold;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    #nameOutput {
+  top: 410px;
+  left: 275px;
+  font-size: 90px;
+  font-weight: bold;
+  color: #070C2B;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#messageOutput {
+  top: 425px;
+  left: 460px;
+  width: 400px;
+  font-size: 78px;
+  font-weight: bold;
+  color: #070C2B;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#datetimeOutput {
+  top: 33%;
+  left: 17%;
+  font-size: 80px;
+  font-style: bolt;
+  text-align: center;
+  color: #070C2B;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+    </style>
+</head>
+<body>
+<div style="height: 300px;"></div>
+  <div class="form" id="formBox">
+    <h2>Введите данные</h2>
+    <label>Маршрут автобуса:
+      <input type="text" id="nameInput">
+    </label><br><br>
+    <label>Номер автобуса:
+      <textarea id="messageInput"></textarea>
+    </label><br><br>
+    <button onclick="showTemplate()">Показать</button>
+  </div>
+
+  <div class="template-wrapper" id="templateBox">
+    <div class="background"></div>
+
+    <div class="field" id="nameOutput"></div>
+    <div class="field" id="messageOutput"></div>
+    <div class="field" id="datetimeOutput"></div>
+
+<div style="height: 300px;"></div>
+
+  </div>
+
+  <script>
+    function showTemplate() {
+  const name = document.getElementById('nameInput').value;
+  const message = document.getElementById('messageInput').value;
+
+  document.getElementById('nameOutput').textContent = name;
+  document.getElementById('messageOutput').textContent = message;
+
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - 2); // ⬅️ Минус 2 минуты
+
+  const date = now.toLocaleDateString('ru-RU');
+  const time = now.toLocaleTimeString('ru-RU', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+
+  document.getElementById('datetimeOutput').textContent = `${date} ${time}`;
+
+  document.getElementById('formBox').style.display = 'none';
+  document.getElementById('templateBox').style.display = 'block';
+}
+
+
+  </script>
+
+
+
+
+</body>
+</html>
