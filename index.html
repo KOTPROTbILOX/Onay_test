@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>тест версия онай</title>
+  <title>Шаблон</title>
   <style>
     * {
       margin: 0;
@@ -12,36 +12,36 @@
 
     html, body {
       width: 100%;
-      min-height: 100%;
-      overflow-x: hidden;
+      height: 100%;
       background: #fff;
       font-family: sans-serif;
     }
 
     .form {
       padding: 20px;
+      font-size: 60px;
     }
 
     input, textarea, button {
-      font-size: 70px;
+      font-size: 60px;
       width: 100%;
-      height: 200px;
+      height: 160px;
     }
 
     .template-wrapper {
       display: none;
       position: relative;
-      min-height: 100vh;
-      padding-bottom: 120px; /* невидимый запас снизу */
+      width: 100%;
+      height: 100vh;
+      aspect-ratio: 9 / 19.5;
+      overflow: hidden;
     }
 
     .background {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('Onay.png'); /* твоя PNG */
+      background-image: url('Onay.png');
       background-size: cover;
       background-position: center;
       z-index: 0;
@@ -49,40 +49,32 @@
 
     .field {
       position: absolute;
+      z-index: 1;
       font-weight: bold;
       white-space: nowrap;
-      z-index: 1;
+      color: #070C2B;
+      font-family: system-ui, sans-serif;
     }
 
     #nameOutput {
-  top: 410px;
-  left: 275px;
-  font-size: 90px;
-  font-weight: bold;
-  color: #070C2B;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+      top: 43%;
+      left: 27%;
+      font-size: 4vw;
+    }
 
-#messageOutput {
-  top: 410px;
-  left: 460px;
-  width: 400px;
-  font-size: 76px;
-  font-weight: bold;
-  color: #070C2B;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+    #messageOutput {
+      top: 52%;
+      left: 50%;
+      font-size: 2.5vw;
+      width: 20vw;
+    }
 
-#datetimeOutput {
-  top: 33%;
-  left: 17%;
-  font-size: 80px;
-  font-style: bolt;
-  text-align: center;
-  color: #070C2B;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-    </style>
+    #datetimeOutput {
+      top: 35%;
+      left: 17%;
+      font-size: 3.5vw;
+    }
+  </style>
 </head>
 <body>
 <div style="height: 300px; background-color: #f9d949;"></div>
@@ -99,49 +91,34 @@
 
   <div class="template-wrapper" id="templateBox">
     <div class="background"></div>
-
     <div class="field" id="nameOutput"></div>
     <div class="field" id="messageOutput"></div>
     <div class="field" id="datetimeOutput"></div>
-
-<div style="height: 300px;"></div>
-
   </div>
 
   <script>
     function showTemplate() {
-  const name = document.getElementById('nameInput').value;
-  const message = document.getElementById('messageInput').value;
+      const name = document.getElementById('nameInput').value;
+      const message = document.getElementById('messageInput').value;
 
-  document.getElementById('nameOutput').textContent = name;
-  document.getElementById('messageOutput').textContent = message;
+      document.getElementById('nameOutput').textContent = name;
+      document.getElementById('messageOutput').textContent = message;
 
-  const now = new Date();
-  now.setMinutes(now.getMinutes() - 2); // ⬅️ Минус 2 минуты
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - 2); // минус 2 минуты
+      const date = now.toLocaleDateString('ru-RU');
+      const time = now.toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
 
-  const date = now.toLocaleDateString('ru-RU');
-  const time = now.toLocaleTimeString('ru-RU', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  });
+      document.getElementById('datetimeOutput').textContent = ${date} ${time};
 
-  document.getElementById('datetimeOutput').textContent = `${date} ${time}`;
-
-  document.getElementById('formBox').style.display = 'none';
-  document.getElementById('templateBox').style.display = 'block';
-}
-
-
+      document.getElementById('formBox').style.display = 'none';
+      document.getElementById('templateBox').style.display = 'block';
+    }
   </script>
-
-
-
 
 </body>
 </html>
-
-
-
-
-
